@@ -23,6 +23,7 @@ env = environ.Env(
     DISABLE_SERVER_SIDE_CURSORS=(bool, True),
     SECRET_KEY=(str, ""),
     ALLOWED_HOSTS=(list, []),
+    CORS_ALLOWED_ORIGINS=(list, []),
     PROTOCOL=(str, ""),
     SOCIAL_AUTH_DISCORD_KEY=(str, ""),
     SOCIAL_AUTH_DISCORD_SECRET=(str, ""),
@@ -81,6 +82,10 @@ DEBUG_SIMULATED_LAG = env.int("DEBUG_SIMULATED_LAG")
 SECRET_KEY = env.str("SECRET_KEY")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
+if CORS_ALLOWED_ORIGINS == ["*"]:
+    CORS_ALLOWED_ORIGINS = []
+    CORS_ALLOW_ALL_ORIGINS = True
 
 
 DATABASES = {"default": env.db()}
